@@ -1,0 +1,76 @@
+{
+  "consumer": {
+    "name": "consumer-messaging"
+  },
+  "messages": [
+    {
+      "contents": "{\"type\":\"type1\"}",
+      "description": "a request for a cat",
+      "matchingRules": {
+        "body": {
+          "$": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "{\"type\":\"type1|type2\"}"
+              }
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "contentType": "application/json",
+        "queue": "animals"
+      },
+      "providerStates": [
+        {
+          "name": "a cat named drover"
+        }
+      ]
+    },
+    {
+      "contents": {
+        "type": "bulldog"
+      },
+      "description": "a request for a dog",
+      "matchingRules": {
+        "body": {
+          "$": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "{\"type\":\"bulldog|sheepdog\"}"
+              }
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "contentType": "application/json",
+        "queue": "animals"
+      },
+      "providerStates": [
+        {
+          "name": "a dog named drover"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "10.1.1"
+    },
+    "pactRust": {
+      "ffi": "0.3.5",
+      "models": "0.4.1"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "provider-messaging"
+  }
+}
